@@ -2,7 +2,7 @@
 <html>
  <head>
   <title>MultipartRequest를 이용한 파일 업로드</title>
-  <Script language="javascript">
+  <script type="text/javascript">
 	function fnCheck(){
 		if(document.formUpload.upfile.value == ""){
 			alert("업로드할 파일을 선택하세요");
@@ -15,14 +15,13 @@
 		} 
 		return true;
 	}
-  </Script>
+  </script>
  </head>
  <body>
 
 	<form name="formUpload" method="post" action="upload_cos_ok.jsp" enctype="multipart/form-data" onSubmit="return fnCheck()">
-	<center>
 	<h2> MultipartRequest를 이용한 파일 업로드 </h2>
-	<table border="1" width="500" cellpadding="5">
+	<table border="1" style="padding: 5px; width: 500px;">
 	<tr>
 	 <td align="right"> 파일 </td>
 	 <td> 
@@ -40,6 +39,7 @@
 		<option value="movie">동영상</option>
 		<option value="music">음악</option>
 		<option value="etc">기타</option>
+		</select>
 	 </td>
 	</tr>
 	<tr>
