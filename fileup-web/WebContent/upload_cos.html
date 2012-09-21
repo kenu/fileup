@@ -1,0 +1,59 @@
+<!-- upload_cos.html -->
+<html>
+ <head>
+  <title>MultipartRequest를 이용한 파일 업로드</title>
+  <script type="text/javascript">
+	function fnCheck(){
+		if(document.formUpload.upfile.value == ""){
+			alert("업로드할 파일을 선택하세요");
+			document.formUpload.upfile.focus();
+			return false;
+		} else if(document.formUpload.division.value == ""){
+			alert("종류를 선택하세요");
+			document.formUpload.division.focus();
+			return false;
+		} 
+		return true;
+	}
+  </script>
+ </head>
+ <body>
+
+	<form name="formUpload" method="post" action="upload_cos_ok.jsp" enctype="multipart/form-data" onSubmit="return fnCheck()">
+	<h2> MultipartRequest를 이용한 파일 업로드 </h2>
+	<table border="1" style="padding: 5px; width: 500px;">
+	<tr>
+	 <td align="right"> 파일 </td>
+	 <td> 
+		<input type="file" name="upfile" onkeydown="event.returnValue=false;"> 
+	 </td>
+	</tr>
+	<tr>
+	 <td align="right"> 종류 </td>
+	 <td> 
+		<select name="division">
+		<option value="">-- 선택 --</option>
+		<option value="game">게임</option>
+		<option value="util">유틸리티</option>
+		<option value="doc">문서자료</option>
+		<option value="movie">동영상</option>
+		<option value="music">음악</option>
+		<option value="etc">기타</option>
+		</select>
+	 </td>
+	</tr>
+	<tr>
+	 <td align="right"> 설명 </td>
+	 <td>
+		<textarea name="contents" rows="5" cols="55"></textarea>
+	 </td>
+	</tr>
+	<tr>
+	 <td align="center" colspan="2">
+	  <input type="submit" value="업로드">
+	  <input type="reset" value="다시작성">
+	 </td>
+	</tr>
+	</table>
+	</form>
+ </body>
