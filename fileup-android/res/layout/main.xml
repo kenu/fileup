@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+<Button android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:onClick="push"
+	android:text="갤러리 호출하기"/>
+<Button android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:onClick="takePicture"
+    android:text="카메라로 찍기"/>
+<ImageView android:layout_width="wrap_content"
+   	android:layout_height="wrap_content"
+   	android:id="@+id/imageView"/>
+</LinearLayout>
