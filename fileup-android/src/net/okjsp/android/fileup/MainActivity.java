@@ -34,11 +34,11 @@ public class MainActivity extends Activity {
    
     //갤러리 호출해서 이미지 읽어오기
     public void push(View v){
-    	//사진 읽어오기위한 uri 작성하기.
+    	//사진 읽어오기 위한 uri 작성하기.
     	 Uri uri = Uri.parse("content://media/external/images/media");
     	 //무언가 보여달라는 암시적 인텐트 객체 생성하기.
          Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-         //인텐트에 요청을 덛붙인다. 
+         //인텐트에 요청을 덧붙인다. 
          intent.setAction(Intent.ACTION_GET_CONTENT);
          //모든 이미지
          intent.setType("image/*");
@@ -54,9 +54,10 @@ public class MainActivity extends Activity {
 
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-		try{
+		if (intent == null) return;
+    	try{
 			//인텐트에 데이터가 담겨 왔다면
-			if(!intent.getData().equals(null)){
+			if(intent.getData() != null){
 				//해당경로의 이미지를 intent에 담긴 이미지 uri를 이용해서 Bitmap형태로 읽어온다.
 			    Bitmap selPhoto = Images.Media.getBitmap(getContentResolver(), intent.getData());
 			    //이미지의 크기 조절하기.
@@ -76,7 +77,7 @@ public class MainActivity extends Activity {
 		Uri selPhotoUri = intent.getData();
 	
 		//업로드할 서버의 url 주소
-	    String urlString = "http://192.168.0.157:8888/FileupServer/fileup.jsp";
+	    String urlString = "http://192.168.0.7:8080/fileup-server/upload_ok.jsp";
 	    //절대경로를 획득한다!!! 중요~
 	    Cursor c = getContentResolver().query(Uri.parse(selPhotoUri.toString()), null,null,null,null);
 	    c.moveToNext();
@@ -115,7 +116,7 @@ public class MainActivity extends Activity {
     		DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
     		//전송할 데이터의 시작임을 알린다.
     		dos.writeBytes(twoHyphens + boundary + lineEnd);
-    		dos.writeBytes("Content-Disposition: form-data; name=\"uploadfile\";filename=\"" + fileName+"\"" + lineEnd);
+    		dos.writeBytes("Content-Disposition: form-data; name=\"upfile\";filename=\"" + fileName+"\"" + lineEnd);
     		dos.writeBytes(lineEnd);
     		//한번에 읽어들일수있는 스트림의 크기를 얻어온다.
     		int bytesAvailable = mFileInputStream.available();
@@ -149,10 +150,10 @@ public class MainActivity extends Activity {
     			b.append( (char)ch );
     		}
     		String s=b.toString(); 
-    		Log.e("Test", "result = " + s);
+    		Log.d("Test", "result = " + s);
        } catch (Exception e) {
-    	   Log.d("Test", "exception " + e.getMessage());
-    	   Toast.makeText(this,"업로드중 에러발생!", 0).show();
+    	   Log.e("Test", "exception " + e.getMessage());
+    	   Toast.makeText(this,"업로드중 에러발생!" +  e.getMessage(), 0).show();
        }  
    }
      
