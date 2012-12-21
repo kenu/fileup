@@ -14,7 +14,7 @@
   // request.setCharacterEncoding("euc-kr"); 
 
   String savePath = application.getRealPath("/") + "upload";
-  int sizeLimit = 1 * 1024 * 1024 ;  // 1 메가까지 제한한다. 넘어서면 IOException 발생
+  int sizeLimit = 100 * 1024 * 1024 ;  // 100 메가까지 제한한다. 넘어서면 IOException 발생
 
 
   try{
