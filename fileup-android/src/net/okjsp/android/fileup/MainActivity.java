@@ -77,7 +77,7 @@ public class MainActivity extends Activity {
 		Uri selPhotoUri = intent.getData();
 	
 		//업로드할 서버의 url 주소
-	    String urlString = "http://192.168.0.7:8080/fileup-server/upload_ok.jsp";
+	    String urlString = "http://14.63.213.32/kenu/upload_ok.jsp";
 	    //절대경로를 획득한다!!! 중요~
 	    Cursor c = getContentResolver().query(Uri.parse(selPhotoUri.toString()), null,null,null,null);
 	    c.moveToNext();
