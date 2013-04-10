@@ -32,21 +32,21 @@ public class MainActivity extends Activity {
     }
     final int REQ_SELECT=0;
    
-    //°¶·¯¸® È£ÃâÇØ¼­ ÀÌ¹ÌÁö ÀĞ¾î¿À±â
+    //ê°¤ëŸ¬ë¦¬ í˜¸ì¶œí•´ì„œ ì´ë¯¸ì§€ ì½ì–´ì˜¤ê¸°
     public void push(View v){
-    	//»çÁø ÀĞ¾î¿À±â À§ÇÑ uri ÀÛ¼ºÇÏ±â.
+    	//ì‚¬ì§„ ì½ì–´ì˜¤ê¸° ìœ„í•œ uri ì‘ì„±í•˜ê¸°.
     	 Uri uri = Uri.parse("content://media/external/images/media");
-    	 //¹«¾ğ°¡ º¸¿©´Ş¶ó´Â ¾Ï½ÃÀû ÀÎÅÙÆ® °´Ã¼ »ı¼ºÇÏ±â.
+    	 //ë¬´ì–¸ê°€ ë³´ì—¬ë‹¬ë¼ëŠ” ì•”ì‹œì  ì¸í…íŠ¸ ê°ì²´ ìƒì„±í•˜ê¸°.
          Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-         //ÀÎÅÙÆ®¿¡ ¿äÃ»À» µ¡ºÙÀÎ´Ù. 
+         //ì¸í…íŠ¸ì— ìš”ì²­ì„ ë§ë¶™ì¸ë‹¤. 
          intent.setAction(Intent.ACTION_GET_CONTENT);
-         //¸ğµç ÀÌ¹ÌÁö
+         //ëª¨ë“  ì´ë¯¸ì§€
          intent.setType("image/*");
-         //°á°ú°ªÀ» ¹Ş¾Æ¿À´Â ¾×Æ¼ºñÆ¼¸¦ ½ÇÇàÇÑ´Ù.
+         //ê²°ê³¼ê°’ì„ ë°›ì•„ì˜¤ëŠ” ì•¡í‹°ë¹„í‹°ë¥¼ ì‹¤í–‰í•œë‹¤.
          startActivityForResult(intent, REQ_SELECT);
          
     }
-    //Ä«¸Ş¶ó·Î Âï±â
+    //ì¹´ë©”ë¼ë¡œ ì°ê¸°
     public void takePicture(View v){
     	  Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
           intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -56,16 +56,16 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		if (intent == null) return;
     	try{
-			//ÀÎÅÙÆ®¿¡ µ¥ÀÌÅÍ°¡ ´ã°Ü ¿Ô´Ù¸é
+			//ì¸í…íŠ¸ì— ë°ì´í„°ê°€ ë‹´ê²¨ ì™”ë‹¤ë©´
 			if(intent.getData() != null){
-				//ÇØ´ç°æ·ÎÀÇ ÀÌ¹ÌÁö¸¦ intent¿¡ ´ã±ä ÀÌ¹ÌÁö uri¸¦ ÀÌ¿ëÇØ¼­ BitmapÇüÅÂ·Î ÀĞ¾î¿Â´Ù.
+				//í•´ë‹¹ê²½ë¡œì˜ ì´ë¯¸ì§€ë¥¼ intentì— ë‹´ê¸´ ì´ë¯¸ì§€ urië¥¼ ì´ìš©í•´ì„œ Bitmapí˜•íƒœë¡œ ì½ì–´ì˜¨ë‹¤.
 			    Bitmap selPhoto = Images.Media.getBitmap(getContentResolver(), intent.getData());
-			    //ÀÌ¹ÌÁöÀÇ Å©±â Á¶ÀıÇÏ±â.
+			    //ì´ë¯¸ì§€ì˜ í¬ê¸° ì¡°ì ˆí•˜ê¸°.
 			    selPhoto = Bitmap.createScaledBitmap(selPhoto, 100, 100, true);
-			    //image_bt.setImageBitmap(selPhoto);//½æ³×ÀÏ
-			    //È­¸é¿¡ Ãâ·ÂÇØº»´Ù.
+			    //image_bt.setImageBitmap(selPhoto);//ì¸ë„¤ì¼
+			    //í™”ë©´ì— ì¶œë ¥í•´ë³¸ë‹¤.
 			    imageView.setImageBitmap(selPhoto);
-			    Log.e("¼±ÅÃ µÈ ÀÌ¹ÌÁö ", "selPhoto : " + selPhoto);
+			    Log.e("ì„ íƒ ëœ ì´ë¯¸ì§€ ", "selPhoto : " + selPhoto);
 			   
 			}
 		}catch(FileNotFoundException e) {
@@ -73,18 +73,18 @@ public class MainActivity extends Activity {
 		}catch(IOException e) {
 		    e.printStackTrace();
 		}
-		//¼±ÅÃÇÑ ÀÌ¹ÌÁöÀÇ uri¸¦ ÀĞ¾î¿Â´Ù.   
+		//ì„ íƒí•œ ì´ë¯¸ì§€ì˜ urië¥¼ ì½ì–´ì˜¨ë‹¤.   
 		Uri selPhotoUri = intent.getData();
 	
-		//¾÷·ÎµåÇÒ ¼­¹öÀÇ url ÁÖ¼Ò
+		//ì—…ë¡œë“œí•  ì„œë²„ì˜ url ì£¼ì†Œ
 	    String urlString = "http://192.168.0.7:8080/fileup-server/upload_ok.jsp";
-	    //Àı´ë°æ·Î¸¦ È¹µæÇÑ´Ù!!! Áß¿ä~
+	    //ì ˆëŒ€ê²½ë¡œë¥¼ íšë“í•œë‹¤!!! ì¤‘ìš”~
 	    Cursor c = getContentResolver().query(Uri.parse(selPhotoUri.toString()), null,null,null,null);
 	    c.moveToNext();
-	    //¾÷·ÎµåÇÒ ÆÄÀÏÀÇ Àı´ë°æ·Î ¾ò¾î¿À±â("_data") ·Î ÇØµµ µÈ´Ù.
+	    //ì—…ë¡œë“œí•  íŒŒì¼ì˜ ì ˆëŒ€ê²½ë¡œ ì–»ì–´ì˜¤ê¸°("_data") ë¡œ í•´ë„ ëœë‹¤.
 	    String absolutePath = c.getString(c.getColumnIndex(MediaStore.MediaColumns.DATA));
-	    Log.e("###ÆÄÀÏÀÇ Àı´ë °æ·Î###", absolutePath);
-	   //ÆÄÀÏ ¾÷·Îµå ½ÃÀÛ!
+	    Log.e("###íŒŒì¼ì˜ ì ˆëŒ€ ê²½ë¡œ###", absolutePath);
+	   //íŒŒì¼ ì—…ë¡œë“œ ì‹œì‘!
 	   HttpFileUpload(urlString ,"", absolutePath);
 	  
 
@@ -97,53 +97,53 @@ public class MainActivity extends Activity {
     public void HttpFileUpload(String urlString, String params, String fileName) {
     	
     	try{
-    		//¼±ÅÃÇÑ ÆÄÀÏÀÇ Àı´ë °æ·Î¸¦ ÀÌ¿ëÇØ¼­ ÆÄÀÏ ÀÔ·Â ½ºÆ®¸² °´Ã¼¸¦ ¾ò¾î¿Â´Ù.
+    		//ì„ íƒí•œ íŒŒì¼ì˜ ì ˆëŒ€ ê²½ë¡œë¥¼ ì´ìš©í•´ì„œ íŒŒì¼ ì…ë ¥ ìŠ¤íŠ¸ë¦¼ ê°ì²´ë¥¼ ì–»ì–´ì˜¨ë‹¤.
     		FileInputStream mFileInputStream = new FileInputStream(fileName); 
-    		//ÆÄÀÏÀ» ¾÷·ÎµåÇÒ ¼­¹öÀÇ url ÁÖ¼Ò¸¦ÀÌ¿ëÇØ¼­ URL °´Ã¼ »ı¼ºÇÏ±â.
+    		//íŒŒì¼ì„ ì—…ë¡œë“œí•  ì„œë²„ì˜ url ì£¼ì†Œë¥¼ì´ìš©í•´ì„œ URL ê°ì²´ ìƒì„±í•˜ê¸°.
     		URL connectUrl = new URL(urlString);
-    		//Connection °´Ã¼ ¾ò¾î¿À±â. 
+    		//Connection ê°ì²´ ì–»ì–´ì˜¤ê¸°. 
     		HttpURLConnection conn = (HttpURLConnection)connectUrl.openConnection();   
-    		conn.setDoInput(true);//ÀÔ·ÂÇÒ¼ö ÀÖµµ·Ï
-    		conn.setDoOutput(true); //Ãâ·ÂÇÒ¼ö ÀÖµµ·Ï
-    		conn.setUseCaches(false);  //Ä³½¬ »ç¿ëÇÏÁö ¾ÊÀ½
-    		//post Àü¼Û
+    		conn.setDoInput(true);//ì…ë ¥í• ìˆ˜ ìˆë„ë¡
+    		conn.setDoOutput(true); //ì¶œë ¥í• ìˆ˜ ìˆë„ë¡
+    		conn.setUseCaches(false);  //ìºì‰¬ ì‚¬ìš©í•˜ì§€ ì•ŠìŒ
+    		//post ì „ì†¡
     		conn.setRequestMethod("POST");
-    		//ÆÄÀÏ ¾÷·Îµå ÇÒ¼ö ÀÖµµ·Ï ¼³Á¤ÇÏ±â.
+    		//íŒŒì¼ ì—…ë¡œë“œ í• ìˆ˜ ìˆë„ë¡ ì„¤ì •í•˜ê¸°.
     		conn.setRequestProperty("Connection", "Keep-Alive");
     		conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
        
-    		//DataOutputStream °´Ã¼ »ı¼ºÇÏ±â.
+    		//DataOutputStream ê°ì²´ ìƒì„±í•˜ê¸°.
     		DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
-    		//Àü¼ÛÇÒ µ¥ÀÌÅÍÀÇ ½ÃÀÛÀÓÀ» ¾Ë¸°´Ù.
+    		//ì „ì†¡í•  ë°ì´í„°ì˜ ì‹œì‘ì„ì„ ì•Œë¦°ë‹¤.
     		dos.writeBytes(twoHyphens + boundary + lineEnd);
     		dos.writeBytes("Content-Disposition: form-data; name=\"upfile\";filename=\"" + fileName+"\"" + lineEnd);
     		dos.writeBytes(lineEnd);
-    		//ÇÑ¹ø¿¡ ÀĞ¾îµéÀÏ¼öÀÖ´Â ½ºÆ®¸²ÀÇ Å©±â¸¦ ¾ò¾î¿Â´Ù.
+    		//í•œë²ˆì— ì½ì–´ë“¤ì¼ìˆ˜ìˆëŠ” ìŠ¤íŠ¸ë¦¼ì˜ í¬ê¸°ë¥¼ ì–»ì–´ì˜¨ë‹¤.
     		int bytesAvailable = mFileInputStream.available();
-    		//byte´ÜÀ§·Î ÀĞ¾î¿À±â À§ÇÏ¿© byte ¹è¿­ °´Ã¼¸¦ ÁØºñÇÑ´Ù.
+    		//byteë‹¨ìœ„ë¡œ ì½ì–´ì˜¤ê¸° ìœ„í•˜ì—¬ byte ë°°ì—´ ê°ì²´ë¥¼ ì¤€ë¹„í•œë‹¤.
     		byte[] buffer = new byte[bytesAvailable];
     		int bytesRead = 0;
     		// read image
     		while (bytesRead!=-1) {
-    			//ÆÄÀÏ¿¡¼­ ¹ÙÀÌÆ®´ÜÀ§·Î ÀĞ¾î¿Â´Ù.
+    			//íŒŒì¼ì—ì„œ ë°”ì´íŠ¸ë‹¨ìœ„ë¡œ ì½ì–´ì˜¨ë‹¤.
     			bytesRead = mFileInputStream.read(buffer);
-    			if(bytesRead==-1)break; //´õÀÌ»ó ÀĞÀ» µ¥ÀÌÅÍ°¡ ¾ø´Ù¸é ºüÀú³ª¿Â´Ù.
+    			if(bytesRead==-1)break; //ë”ì´ìƒ ì½ì„ ë°ì´í„°ê°€ ì—†ë‹¤ë©´ ë¹ ì €ë‚˜ì˜¨ë‹¤.
         		Log.d("Test", "image byte is " + bytesRead);
-        		//ÀĞÀº¸¸Å­ Ãâ·ÂÇÑ´Ù.
+        		//ì½ì€ë§Œí¼ ì¶œë ¥í•œë‹¤.
     			dos.write(buffer, 0, bytesRead);
-    			//Ãâ·ÂÇÑ µ¥ÀÌÅÍ ¹Ğ¾î³»±â
+    			//ì¶œë ¥í•œ ë°ì´í„° ë°€ì–´ë‚´ê¸°
     			dos.flush();
     		} 
-    		//Àü¼ÛÇÒ µ¥ÀÌÅÍÀÇ ³¡ÀÓÀ» ¾Ë¸°´Ù.
+    		//ì „ì†¡í•  ë°ì´í„°ì˜ ëì„ì„ ì•Œë¦°ë‹¤.
     		dos.writeBytes(lineEnd);
     		dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
-    		//flush() Å¸ÀÌ¹Ö??
+    		//flush() íƒ€ì´ë°??
     		//dos.flush(); 
-    		dos.close();//½ºÆ®¸² ´İ¾ÆÁÖ±â   
-    		mFileInputStream.close();//½ºÆ®¸² ´İ¾ÆÁÖ±â.
+    		dos.close();//ìŠ¤íŠ¸ë¦¼ ë‹«ì•„ì£¼ê¸°   
+    		mFileInputStream.close();//ìŠ¤íŠ¸ë¦¼ ë‹«ì•„ì£¼ê¸°.
     		// get response
     		int ch;
-    		//ÀÔ·Â ½ºÆ®¸² °´Ã¼¸¦ ¾ò¾î¿Â´Ù.
+    		//ì…ë ¥ ìŠ¤íŠ¸ë¦¼ ê°ì²´ë¥¼ ì–»ì–´ì˜¨ë‹¤.
     		InputStream is = conn.getInputStream();
     		StringBuffer b =new StringBuffer();
     		while( ( ch = is.read() ) != -1 ){
@@ -153,7 +153,7 @@ public class MainActivity extends Activity {
     		Log.d("Test", "result = " + s);
        } catch (Exception e) {
     	   Log.e("Test", "exception " + e.getMessage());
-    	   Toast.makeText(this,"¾÷·ÎµåÁß ¿¡·¯¹ß»ı!" +  e.getMessage(), 0).show();
+    	   Toast.makeText(this,"ì—…ë¡œë“œì¤‘ ì—ëŸ¬ë°œìƒ!" +  e.getMessage(), 0).show();
        }  
    }
      
