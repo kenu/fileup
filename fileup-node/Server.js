@@ -30,6 +30,13 @@ app.post('/api/photo', function (req, res) {
     }
 });
 
+app.post('/api/excel', function (req, res) {
+    if (done == true) {
+        console.log(req.files);
+        res.end("Excel File uploaded.\n" + JSON.stringify(req.files));
+    }
+});
+
 app.listen(3000, function () {
     console.log("Working on port 3000");
 });
