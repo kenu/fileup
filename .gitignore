@@ -2,3 +2,5 @@ node_modules
 .gradle
 .mvn
 .DS_Store
+.idea
+build

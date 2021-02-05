@@ -27,6 +27,7 @@ targetCompatibility = 1.8
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    compile("net.coobird:thumbnailator:0.4.13")
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
