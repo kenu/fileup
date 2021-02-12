@@ -17,6 +17,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.stream.Stream;
 
 @Service
@@ -46,14 +49,22 @@ public class FileSystemStorageService implements StorageService {
                 Files.copy(inputStream, this.rootLocation.resolve(filename),
                         StandardCopyOption.REPLACE_EXISTING);
 
-                // Thumbnail create
-                String originPath = this.rootLocation.resolve(filename).toString();
-                String outputPath = this.rootLocation.resolve("th_" + filename).toString();
-                Thumbnails.of(originPath).size(80, 80).toFile(outputPath);
+                ExecutorService executorService = Executors.newSingleThreadExecutor();
+                Future<String> future = executorService.submit(() -> {
+                        makeThumbnail(filename);
+                    return "created";
+                });
             }
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + filename, e);
         }
+    }
+
+    private void makeThumbnail(String filename) throws IOException {
+        // Thumbnail create
+        String originPath = this.rootLocation.resolve(filename).toString();
+        String outputPath = this.rootLocation.resolve("th_" + filename).toString();
+        Thumbnails.of(originPath).size(80, 80).toFile(outputPath);
     }
 
     @Override
