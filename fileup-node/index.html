@@ -9,13 +9,9 @@
         <input type="file" name="userPhoto" multiple/>
         <input type="submit" value="Upload Image" name="submit">
     </form>
-    <form id="uploadForm" enctype="multipart/form-data" action="/api/excel" method="post">
-        <input type="file" name="userExcel"/>
-        <input type="submit" value="Upload Excel" name="submit">
-    </form>
 </body>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function () {
         $('#uploadForm').submit(function () {
