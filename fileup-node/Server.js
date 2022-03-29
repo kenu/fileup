@@ -1,26 +1,29 @@
 // https://github.com/expressjs/multer/blob/master/doc/README-ko.md
 var express = require('express');
-var multer = require('multer');
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './uploads/');
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now());
-  }
-});
-var upload = multer({ storage: storage });
+var formidable = require('formidable');
+
 var app = express();
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-app.post('/api/photo', upload.array('userPhoto'), function (req, res) {
+app.post('/api/upload', (req, res, next) => {
   console.log(req.files);
-  res.end("File uploaded.\n" + JSON.stringify(req.files));
+  const form = formidable({
+    uploadDir: __dirname + '/uploads/',
+    filename: Date.now(),
+  });
+
+  form.parse(req, (err, fields, files) => {
+    if (err) {
+      next(err);
+      return;
+    }
+    res.json({ fields, files });
+  });
 });
 
 app.listen(3000, function () {
-  console.log("Working on port 3000");
+  console.log('Working on port 3000');
 });
