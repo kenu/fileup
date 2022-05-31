@@ -4,6 +4,6 @@
   "dependencies": {
     "express": "^4.16.4",
     "formidable": "^2.0.1",
-    "multer": "^1.4.2"
+    "multer": "^1.4.5-lts.1"
   }
 }
