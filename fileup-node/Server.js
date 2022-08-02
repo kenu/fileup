@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-app.post('/api/upload', (req, res, next) => {
+app.post('/api/photo', (req, res, next) => {
   console.log(req.files);
   const form = formidable({
     uploadDir: __dirname + '/uploads/',
