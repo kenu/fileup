@@ -1,31 +1,32 @@
-<html>
-
-<head>
+<!DOCTYPE >
+<html lang="en">
+  <head>
     <title>File upload Node.</title>
-</head>
+  </head>
 
-<body>
-    <form id="uploadForm" enctype="multipart/form-data" action="/api/photo" method="post">
-        <input type="file" name="userPhoto" multiple/>
-        <input type="submit" value="Upload Image" name="submit">
+  <body>
+    <form id="uploadForm" enctype="multipart/form-data" method="post">
+      <input type="file" name="userPhoto" multiple />
+      <input type="submit" value="Upload Image" name="submit" />
     </form>
-</body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
-<script>
-    $(document).ready(function () {
-        $('#uploadForm').submit(function () {
-            $(this).ajaxSubmit({
-                error: function (xhr) {
-                    status('Error: ' + xhr.status);
-                },
-                success: function (response) {
-                    console.log(response);
-                }
-            });
-            return false;
-        });
-    });
-</script>
-
+  </body>
+  <script>
+    window.onload = () => {
+      const form = document.getElementById("uploadForm");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        fetch("/api/photo", { method: "POST", body: formData })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            const element = data.files.userPhoto;
+            const img = document.createElement("img");
+            img.src = element.newFilename;
+            img.alt = element.originalFilename;
+            document.querySelector("body").appendChild(img);
+          });
+      });
+    };
+  </script>
 </html>
