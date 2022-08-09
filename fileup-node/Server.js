@@ -1,17 +1,17 @@
-// https://github.com/expressjs/multer/blob/master/doc/README-ko.md
-var express = require('express');
-var formidable = require('formidable');
+// https://github.com/node-formidable/formidable
+const express = require("express");
+const formidable = require("formidable");
 
-var app = express();
+const app = express();
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+app.get("/", (_req, res) => {
+  res.sendFile(__dirname + "/index.html");
 });
 
-app.post('/api/photo', (req, res, next) => {
+app.post("/api/photo", (req, res, next) => {
   console.log(req.files);
   const form = formidable({
-    uploadDir: __dirname + '/uploads/',
+    uploadDir: __dirname + "/uploads/",
     filename: Date.now(),
   });
 
@@ -25,5 +25,5 @@ app.post('/api/photo', (req, res, next) => {
 });
 
 app.listen(3000, function () {
-  console.log('Working on port 3000');
+  console.log("Working on port 3000");
 });
